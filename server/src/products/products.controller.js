@@ -12,7 +12,6 @@ async function list(req, res) {
  * Read handler for single product resource.
  */
 function read(req, res) {
-  console.log({ read: res.locals.product });
   res.json({ data: res.locals.product });
 }
 

@@ -9,7 +9,6 @@ function read(id) {
 }
 
 function updateLike({ product_id, likes }) {
-  console.log("service", product_id, likes);
   return knex("products")
     .where({ product_id })
     .update({ likes })

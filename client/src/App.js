@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" >
+        <Route exact path="/">
           <MainPage />
         </Route>
         <Route path="/products/:productId">

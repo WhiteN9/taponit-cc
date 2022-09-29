@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Details from "./Details";
+import ProductNav from "./ProductNav";
 import { readProduct, updateLike } from "../utils/api";
 import ErrorAlert from "./ErrorAlert";
 
@@ -22,6 +23,7 @@ function DetailedProduct() {
   }
 
   const handleUpdateLike = async (evt) => {
+    evt.currentTarget.disabled = true;
     try {
       const updateLikeCount = await updateLike(productId);
       setProduct(updateLikeCount);
@@ -32,10 +34,13 @@ function DetailedProduct() {
     }
   };
 
+  //todo: handle UnLike button handler
+
   return (
     <div className="container">
+      <ProductNav productId={product.product_id} />
       <section className="row mt-4">
-        <article className="col-sm-12 col-md-6 col-lg-3">
+        <article className="col-sm-12 col-md-9 col-lg-6">
           <img
             alt={`${product.product_title} Pokemon`}
             className="rounded"
