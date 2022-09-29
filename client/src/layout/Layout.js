@@ -1,5 +1,5 @@
 import React from "react";
-import Main from "./Main";
+import MainPage from "./MainPage";
 import "./Layout.css";
 
 /**
@@ -11,8 +11,8 @@ function Layout() {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2 side-bar">
-          <Main />
+        <div className="">
+          <MainPage />
         </div>
       </div>
     </div>

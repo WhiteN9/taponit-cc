@@ -17,10 +17,11 @@ headers.append("Content-Type", "application/json");
 async function fetchJson(url, options) {
   try {
     const response = await fetch(url, options);
-
-    //parse the response to json
-    const data = await response.json();
-    return data;
+    if (response.status === 204) {
+      return null;
+    }
+    const payload = await response.json();
+    return payload.data;
   } catch (error) {
     if (error.name !== "AbortError") {
       console.log(error);
@@ -30,40 +31,32 @@ async function fetchJson(url, options) {
 
 /**
  * Retrieves all existing products.
- * @param signal
- * Optional AbortController.signal
  */
-export async function listProducts(signal) {
+export async function listProducts() {
   const url = new URL(`${API_BASE_URL}/products`);
-  return await fetchJson(url, { headers, signal }, []);
+  return await fetchJson(url, { headers });
 }
 
 /**
  * Retrieves a product by the param ID.
  * @param paramId
  * The product Id.
- * @param signal
- * Optional AbortController.signal
  */
-export async function readProduct(prodId, signal) {
+export async function readProduct(prodId) {
   const url = new URL(`${API_BASE_URL}/products/${prodId}`);
-  return await fetchJson(url, { headers, signal }, []);
+  return await fetchJson(url, { headers });
 }
 
 /**
  * Sends the a request to add 1 to the like count.
  * @param data
  * The product to save with the new like count.
- * @param signal
- * Optional AbortController.signal
  */
-export async function updateLike(data, signal) {
-  const url = new URL(`${API_BASE_URL}/products/${data.product_id}`);
+export async function updateLike(prodId) {
+  const url = new URL(`${API_BASE_URL}/products/${prodId}`);
   const options = {
     headers,
-    signal,
     method: "PUT",
-    body: JSON.stringify({ data }),
   };
-  return await fetchJson(url, options, data);
+  return await fetchJson(url, options);
 }
