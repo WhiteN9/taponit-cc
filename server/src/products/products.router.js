@@ -15,4 +15,4 @@ router
   .put(controller.updateLike)
   .all(methodNotAllowed);
 
-module.exports = router;
+export default router;

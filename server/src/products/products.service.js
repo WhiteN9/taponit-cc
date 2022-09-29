@@ -1,7 +1,7 @@
 import knex from "../db/connection.js";
 
 function list() {
-  return knex("products").select("*");
+  return knex("products").select("*").orderBy("product_id");;
 }
 
 function read(id) {

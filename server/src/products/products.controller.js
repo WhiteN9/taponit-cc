@@ -1,4 +1,4 @@
-import * as service from "./products.service.js";
+import service from "./products.service.js";
 
 /**
  * List handler for product resources
@@ -21,14 +21,14 @@ function read(req, res) {
 async function updateLike(req, res) {
   const updateProduct = {
     ...res.locals.product,
-    status: req.body.date.like + 1,
+    likes: res.locals.product.likes + 1,
   };
   const updatedProd = await service.updateLike(updateProduct);
   res.json({ data: updatedProd });
 }
 
 /**
- * Todo: Middleware validations for the GET read request
+ * Middleware validations for the GET read request
  */
 
 async function productExists(req, res, next) {
