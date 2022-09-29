@@ -1,0 +1,82 @@
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+export async function seed(knex) {
+  return knex
+    .raw("TRUNCATE TABLE products RESTART IDENTITY CASCADE")
+    .then(function () {
+      return knex("products").insert([
+        {
+          product_title: "Eevee",
+          description: "Eevee family",
+          url: "133-000-0000",
+          price: 101,
+          likes: 5,
+        },
+        {
+          product_title: "Vaporeon",
+          description: "Eevee family",
+          url: "134-000-0000",
+          price: 120,
+          likes: 2,
+        },
+        {
+          product_title: "Flareon",
+          description: "Eevee family",
+          url: "136-000-0000",
+          price: 150,
+          likes: 1,
+        },
+        {
+          product_title: "Jolteon",
+          description: "Eevee family",
+          url: "135-000-0000",
+          price: 110,
+          likes: 0,
+        },
+        {
+          product_title: "Umbreon",
+          description: "Eevee family",
+          url: "197-000-0000",
+          price: 200,
+          likes: 5,
+        },
+        {
+          product_title: "Sylveon",
+          description: "Eevee family",
+          url: "700-000-0000",
+          price: 200,
+          likes: 15,
+        },
+        {
+          product_title: "Espeon",
+          description: "Eevee family",
+          url: "196-000-0000",
+          price: 400,
+          likes: 54,
+        },
+        {
+          product_title: "Glaceon",
+          description: "Eevee family",
+          url: "471-000-0000",
+          price: 100,
+          likes: 52,
+        },
+        {
+          product_title: "Leafeon",
+          description: "Eevee family",
+          url: "470-000-0000",
+          price: 100,
+          likes: 56,
+        },
+        {
+          product_title: "The Next Eevee",
+          description: "Eevee family",
+          url: "777-000-0000",
+          price: 1000,
+          likes: 0,
+        },
+      ]);
+    });
+}

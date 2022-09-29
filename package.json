@@ -1,0 +1,16 @@
+{
+  "name": "cc-taponit-products-app",
+  "version": "1.0.0",
+  "description": "TapOnIt Products app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "whitenguyen",
+  "license": "ISC"
+}
