@@ -1,18 +1,25 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import Layout from "./layout/Layout";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import MainPage from "./layout/MainPage";
+import DetailedProduct from "./layout/DetailedProduct";
 
 /**
  * Defines the root application component.
+ * Todo if have time: make a <Header />
  * @returns {JSX.Element}
  */
 function App() {
   return (
-    <Switch>
-      <Route path="/">
-        <Layout />
-      </Route>
-    </Switch>
+    <Router>
+      <Switch>
+        <Route exact path="/" >
+          <MainPage />
+        </Route>
+        <Route path="/products/:productId">
+          <DetailedProduct />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

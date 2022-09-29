@@ -21,6 +21,7 @@ async function fetchJson(url, options) {
       return null;
     }
     const payload = await response.json();
+    console.log(payload.data)
     return payload.data;
   } catch (error) {
     if (error.name !== "AbortError") {

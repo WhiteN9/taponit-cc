@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ProductList from "./ProductList";
 import ErrorAlert from "./ErrorAlert.js";
-import { listProducts, updateLike } from "../utils/api.js";
+import { listProducts } from "../utils/api.js";
 /**
  * Defines the main page.
  * @returns {JSX.Element}
@@ -15,55 +14,36 @@ function MainPage() {
   useEffect(loadMainPage, []);
 
   function loadMainPage() {
-    const abortController = new AbortController();
+    setProductError(null);
     setProducts([]);
+    const abortController = new AbortController();
     listProducts().then(setProducts).catch(setProductError);
     return () => abortController.abort();
   }
 
-  const handleUpdateLike = async (evt) => {
-    try {
-      const productId = evt.target.getAttribute("data-product-id-like");
-      await updateLike(productId);
-      loadMainPage();
-    } catch (error) {
-      if (error.name !== "AbortError") {
-        setProductError(error);
-      } else return;
-    }
-  };
+  const productList = products.map(
+    ({ product_id, product_title, url, price }) => (
+      <article key={product_id} className="col-sm-12 col-lg-6 my-2">
+        <img
+          alt={`${product_title} Poster`}
+          className="rounded"
+          src={url}
+          style={{ width: "100%" }}
+        />
+        <Link to={`/products/${product_id}`}>
+          <h3 className="text-center mt-2">
+            {product_title} : ${price}
+          </h3>
+        </Link>
+      </article>
+    )
+  );
 
   return (
-    <main>
-      <h1>Main Page</h1>
-      <div className="row">
-        <div className="col">
-          <div className="d-md-flex mb-3">
-            <h4 className="mb-0">Products</h4>
-          </div>
-          <div className="table-responsive">
-            <table className="table table-striped table-dark">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Product Name</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">URL</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Likes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <ProductList
-                  products={products}
-                  handleUpdateLike={handleUpdateLike}
-                />
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
+    <main className="container">
+      <h2 className="">Latest Products</h2>
+      <hr />
+      <section className="row">{productList}</section>
       <ErrorAlert error={productError} />
     </main>
   );
